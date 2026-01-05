@@ -21,6 +21,7 @@
         </PackageReference>
         <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.15.0" />
         <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
+        <PackageReference Include="Scalar.AspNetCore" Version="2.11.10" />
         <PackageReference Include="Scrutor" Version="7.0.0" />
         <PackageReference Include="Serilog.AspNetCore" Version="9.0.0" />
         <PackageReference Include="Serilog.Settings.Configuration" Version="9.0.0" />
@@ -30,7 +31,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Features\Frases\" />
+      <Folder Include="Features\Auth\Application\Commands\" />
+      <Folder Include="Features\Auth\Application\Queries\" />
       <Folder Include="Shared\" />
       <Folder Include="Shared\Infrastructure\Persistence\Migrations\" />
     </ItemGroup>
