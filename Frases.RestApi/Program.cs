@@ -3,9 +3,12 @@ using System.Text;
 using FrasesApi.Endpoints;
 using FrasesApi.Features.Auth;
 using FrasesApi.Features.Auth.Infrastructure.AuthService;
+using FrasesApi.Features.Frases.Infrastructure.Persistence.Seed;
 using FrasesApi.Shared;
 using FrasesApi.Shared.Domain.Constants;
+using FrasesApi.Shared.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Scalar.AspNetCore;
 using Serilog;
@@ -167,5 +170,12 @@ app.UseHttpsRedirection();
 
 app.MapAuthEndpoints();
 app.MapFrasesEndpoints();
+
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    await context.Database.MigrateAsync();
+    await FrasesSeeder.SeedAsync(context);
+}
 
 app.Run();
